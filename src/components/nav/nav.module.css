@@ -1,0 +1,25 @@
+.nav {
+    display: flex;
+    flex-direction: row;
+    margin: -4px;
+}
+
+.nav a {
+    display: block;
+    border: 1px solid var(--teal);
+    background-color: rgba(var(--teal-rgb), 0.15);
+    padding: 8px;
+    margin: 4px;
+    text-decoration: none;
+    color: var(--teal)
+}
+
+.nav a:hover,
+.nav a.active:hover {
+    background-color: rgba(var(--teal-rgb), 0.5);
+}
+
+.nav a.active {
+    background-color: rgba(var(--teal-rgb), 0.35);
+    pointer-events: none;
+}

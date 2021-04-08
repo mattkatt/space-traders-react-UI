@@ -1,0 +1,9 @@
+.loan {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.loanTitle {
+    text-align: center;
+    margin: 4px 0;
+}

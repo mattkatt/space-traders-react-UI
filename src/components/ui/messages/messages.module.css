@@ -1,0 +1,26 @@
+.message {
+    background-color: #e2e2e2;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.messageCompact {
+    display: inline-block;
+}
+
+.errorMessage {
+    border-color: var(--red);
+    background-color: rgba(var(--red-rgb), 0.15);
+}
+
+.infoMessage {
+    border-color: var(--blue);
+    background-color: rgba(var(--blue-rgb), 0.15);
+}
+
+.successMessage {
+    border-color: var(--green);
+    background-color: rgba(var(--green-rgb), 0.15);
+}

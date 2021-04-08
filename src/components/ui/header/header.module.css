@@ -1,0 +1,13 @@
+.header {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+}
+
+.headerTitle {
+    margin: 0;
+}
+
+.headerContent {
+    margin-left: 8px;
+}
