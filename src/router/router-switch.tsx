@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Switch } from "react-router-dom";
-import { routerConfig } from "./router";
+import { routerConfig } from "./browser-router";
 import PrivateRoute from "./private-route";
 import PublicRoute from "./public-route";
 

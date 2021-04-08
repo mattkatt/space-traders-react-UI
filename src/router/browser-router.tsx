@@ -5,14 +5,15 @@ import Header from "../components/ui/header";
 import Nav from "../components/nav";
 import Container from "../components/ui/container";
 
-export interface routeConfig {
+
+interface routeConfig {
     name: string
     path: string,
     Render: any,
     private: boolean
 }
 
-export interface routerConfig {
+interface routerConfig {
     routes: routeConfig[]
 }
 
@@ -31,3 +32,4 @@ const Router: FC<routerConfig> = ({ routes }) => {
 }
 
 export default Router
+export { routerConfig, routeConfig }

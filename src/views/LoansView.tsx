@@ -1,14 +1,15 @@
 import React, { FC, useEffect, useState } from "react";
 import { spaceTraderService } from "../services/space-trader-service";
 import { useAuth } from "../context/auth-context";
-import Loan, { SpaceTraderLoan } from "../objects/space-trader-loan";
+import { LoanAvailable, LoanClaimed, STLoanAvailable } from "../objects/loan";
 import { InfoMessage } from "../components/ui/messages";
+
 
 const LoansView: FC = () => {
     const { auth } = useAuth()
     const { getAvailableLoans } = spaceTraderService()
     const [ queryAvailableLoans, setQueryAvailableLoans] = useState(false)
-    const [ availableLoans, setAvailableLoans ] = useState<Array<SpaceTraderLoan>>([])
+    const [ availableLoans, setAvailableLoans ] = useState<STLoanAvailable[]>([])
 
     useEffect(() => {
         if (!queryAvailableLoans) {
@@ -28,7 +29,7 @@ const LoansView: FC = () => {
 
         return auth.user.loans.map(loan => {
             return (
-                <Loan loan={ loan } key={ loan.type }/>
+                <LoanClaimed loan={ loan } key={ loan.id }/>
             )
         })
     }
@@ -36,7 +37,7 @@ const LoansView: FC = () => {
     const renderAvailableLoans = () => {
         return availableLoans.map(loan => {
             return (
-                <Loan loan={ loan } key={ loan.type } />
+                <LoanAvailable loan={ loan } key={ loan.type } />
             )
         })
     }

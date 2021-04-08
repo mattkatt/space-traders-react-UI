@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { useAuth } from "../context/auth-context";
 
+
 const DashboardView: FC = () => {
     const { auth } = useAuth()
 

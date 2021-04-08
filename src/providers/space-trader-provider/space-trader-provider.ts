@@ -3,8 +3,12 @@ import { RestfulGetEndpoint, RestfulPostEndpoint } from "../restful-provider/res
 import {
     AccessTokenRequest,
     UserAccountRequest,
-    AccessTokenResponse, BaseTokenRequest, AvailableLoanResponse, UserAccountResponse
+    AccessTokenResponse,
+    BaseTokenRequest,
+    AvailableLoanResponse,
+    UserAccountResponse
 } from './space-trader-provider-interfaces'
+
 
 export interface ISpaceTraderEndpoints {
     gameStatus: RestfulGetEndpoint<{}, { status: string }>

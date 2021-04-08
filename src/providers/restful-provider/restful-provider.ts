@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+
 export interface TRestfulData {
     [key:string]: string
 }

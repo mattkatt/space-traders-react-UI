@@ -1,5 +1,6 @@
 import { TRestfulData, IRestfulProvider } from "./restful-provider";
 
+
 interface RestfulEndpointProps {
     endpoint: string,
     provider: IRestfulProvider

@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
-import { spaceTraderService } from "../../services/space-trader-service";
+import { spaceTraderService } from "../../services";
 import { ErrorMessage, InfoMessage } from "../ui/messages";
+
 
 const UserTokenForm: FC = () => {
     const { generateUserToken } = spaceTraderService()

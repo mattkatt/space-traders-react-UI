@@ -2,8 +2,7 @@ import React, { FC } from 'react'
 import { Link } from "react-router-dom";
 
 import styles from './nav.module.css'
-import RouteNav from "../../router/router-nav";
-import { routeConfig } from "../../router/router";
+import { RouteNav, routeConfig } from "../../router";
 import { useAuth } from "../../context/auth-context";
 
 interface INav {

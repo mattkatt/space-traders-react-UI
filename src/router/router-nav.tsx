@@ -1,6 +1,7 @@
 import React, { FC } from "react";
-import { routerConfig } from "./router";
+import { routerConfig } from "./browser-router";
 import { NavLink } from "react-router-dom";
+
 
 interface IRouteNav extends routerConfig {
     activeClass?: string

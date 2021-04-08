@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import Router, { routeConfig } from "./router/router";
-import LoginView from "./views/LoginView";
-import DashboardView from "./views/DashboardView";
+import BrowserRouter, { routeConfig } from "./router";
 import { useAuth } from "./context/auth-context";
-import LoansView from "./views/LoansView";
+import { DashboardView, LoginView, LoansView } from "./views"
 
 
 function App() {
@@ -43,7 +41,7 @@ function App() {
             { !checkAuth ? (
                 <p>Checking...</p>
             ) : (
-                <Router routes={ spaceTraderRoutes } />
+                <BrowserRouter routes={ spaceTraderRoutes } />
             )}
         </>
     )

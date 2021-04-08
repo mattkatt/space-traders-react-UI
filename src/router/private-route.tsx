@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { useAuth } from "../context/auth-context";
 import { Redirect, Route } from "react-router-dom";
 
+
 interface IPrivateRoute {
     path: string
     exact?: boolean

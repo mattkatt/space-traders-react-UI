@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Form, { Input } from "../ui/forms"
 import { ErrorMessage } from "../ui/messages";
 
-import { spaceTraderService } from "../../services/space-trader-service";
+import { spaceTraderService } from "../../services";
 import { useAuth } from "../../context/auth-context";
 import { useSettings } from "../../context/settings-context";
 import { Button } from "../ui/buttons";

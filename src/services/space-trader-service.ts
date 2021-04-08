@@ -1,12 +1,12 @@
 import { getSpaceTraderProvider } from "../providers/space-trader-provider/space-trader-provider";
-import { SpaceTraderUser } from "../objects/space-trader-user";
-import { SpaceTraderLoan } from "../objects/space-trader-loan";
+import { STUser } from "../objects/user";
+import { STLoanAvailable } from "../objects/loan";
 
 interface ISpaceTraderService {
     checkGameStatus: () => Promise<string>
     generateUserToken: (username: string) => Promise<string>
-    getUserDetails: (username: string, token: string) => Promise<SpaceTraderUser>
-    getAvailableLoans: (token: string) => Promise<SpaceTraderLoan[]>
+    getUserDetails: (username: string, token: string) => Promise<STUser>
+    getAvailableLoans: (token: string) => Promise<STLoanAvailable[]>
 }
 
 export const spaceTraderService = (): ISpaceTraderService => {
@@ -26,7 +26,7 @@ export const spaceTraderService = (): ISpaceTraderService => {
         return response.token
     }
 
-    const getUserDetails = async (username: string, token: string): Promise<SpaceTraderUser> => {
+    const getUserDetails = async (username: string, token: string): Promise<STUser> => {
         const response =  await provider.endpoints.userAccount.get({
             username: username,
             token: token
@@ -35,7 +35,7 @@ export const spaceTraderService = (): ISpaceTraderService => {
         return response.user
     }
 
-    const getAvailableLoans = async (token: string): Promise<SpaceTraderLoan[]> => {
+    const getAvailableLoans = async (token: string): Promise<STLoanAvailable[]> => {
         const response = await provider.endpoints.loans.get({
             token: token
         })

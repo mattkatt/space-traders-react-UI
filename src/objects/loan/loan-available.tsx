@@ -1,16 +1,14 @@
-import { FC } from "react";
-import styles from "./space-trader-loan.module.css";
-import { Button } from "../components/ui/buttons";
+import React, { FC } from "react";
+import { STLoanAvailable } from "./loan-interface";
+import styles from "./loan.module.css";
+import { Button } from "../../components/ui/buttons";
 
-export interface SpaceTraderLoan {
-    amount: number
-    collateralRequired: boolean
-    rate: number
-    termInDays: number
-    type: string
+
+interface ILoanAvailable {
+    loan: STLoanAvailable
 }
 
-const Loan: FC<{ loan: SpaceTraderLoan }> = ({ loan }) => {
+const LoanAvailable: FC<ILoanAvailable> = ({ loan }) => {
     const acceptLoan = () => {
         console.log('Loan Accepted')
     }
@@ -29,4 +27,4 @@ const Loan: FC<{ loan: SpaceTraderLoan }> = ({ loan }) => {
     )
 }
 
-export default Loan
+export default LoanAvailable

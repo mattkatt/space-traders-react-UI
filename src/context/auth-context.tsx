@@ -1,11 +1,11 @@
 import { createContext, useContext, useMemo, useState } from "react";
-import { SpaceTraderUser } from "../objects/space-trader-user";
+import { STUser } from "../objects/user";
 import { useSettings } from "./settings-context";
-import { localStorageService } from "../services/local-storage-service";
+import { localStorageService } from "../services";
 
 
 interface IAuthState {
-    user: SpaceTraderUser
+    user: STUser
     token: string
     isAuth: boolean
 }
@@ -13,11 +13,11 @@ interface IAuthState {
 interface IAuth {
     auth: IAuthState
     checkLocalAuth: () => boolean
-    login: (user: SpaceTraderUser, token: string) => void
+    login: (user: STUser, token: string) => void
     logout: () => void
 }
 
-const emptyUser: SpaceTraderUser = {
+const emptyUser: STUser = {
     username: "",
     credits: 0,
     loans: [],
@@ -44,7 +44,7 @@ function useAuth(): IAuth {
     const { settings } = useSettings()
     const localStorage = localStorageService()
 
-    const setLoggedInUser = (user: SpaceTraderUser, token: string) => {
+    const setLoggedInUser = (user: STUser, token: string) => {
         setAuth({
             user: user,
             token: token,
@@ -72,7 +72,7 @@ function useAuth(): IAuth {
         return true
     }
 
-    const login = (user: SpaceTraderUser, token: string) => {
+    const login = (user: STUser, token: string) => {
         setLoggedInUser(user, token)
 
         localStorage.set('auth', {
