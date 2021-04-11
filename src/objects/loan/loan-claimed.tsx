@@ -15,11 +15,11 @@ const LoanClaimed: FC<ILoanClaimed> = ({ loan }) => {
         console.log('Repay Loan')
     }
 
+    const classNames = [styles.loan, styles.loanClaimed].concat(' ')
+
     return (
-        <figure className={ styles.loan }>
-            <h3 className={ styles.loanTitle }>
-                { loan.type }
-            </h3>
+        <figure className={ classNames }>
+            <h3 className={ styles.loanTitle }>{ loan.type }</h3>
             <span>Loan Amount: { loan.repaymentAmount }</span>
             <span>Due Date: { dueDate.toDateString() }</span>
             <span>Status: { loan.status } days</span>

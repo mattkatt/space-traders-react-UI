@@ -1,6 +1,15 @@
 .loan {
     display: inline-flex;
     flex-direction: column;
+    border: 1px solid #fff
+}
+
+.loan.loanAvailable {
+    border-color: var(--blue);
+}
+
+.loan.loanClaimed {
+    border-color: var(--green);
 }
 
 .loanTitle {

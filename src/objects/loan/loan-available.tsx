@@ -13,11 +13,11 @@ const LoanAvailable: FC<ILoanAvailable> = ({ loan }) => {
         console.log('Loan Accepted')
     }
 
+    const classNames = [styles.loan, styles.loanAvailable].concat(' ')
+
     return (
-        <figure className={ styles.loan }>
-            <h3 className={ styles.loanTitle }>
-                { loan.type }
-            </h3>
+        <figure className={ classNames }>
+            <h3 className={ styles.loanTitle }>{ loan.type }</h3>
             <span>Loan Amount: { loan.amount }</span>
             <span>Rate: { loan.rate }</span>
             <span>Term: {loan.termInDays} days</span>
