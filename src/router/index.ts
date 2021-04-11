@@ -5,4 +5,5 @@ import RouteNav from "./router-nav";
 import RouteSwitch from "./router-switch";
 import { routeConfig , routerConfig } from './router-interfaces'
 
-export { Router, RouteNav, RouteSwitch, PrivateRoute, PublicRoute, routeConfig, routerConfig }
+export { Router, RouteNav, RouteSwitch, PrivateRoute, PublicRoute }
+export type { routeConfig, routerConfig }

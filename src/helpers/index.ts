@@ -1,3 +1,4 @@
+import CreditsHelpers from "./credits-helpers";
 import StringHelpers from "./string-helpers";
 
-export { StringHelpers }
+export { CreditsHelpers, StringHelpers }

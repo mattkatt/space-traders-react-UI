@@ -1,3 +1,3 @@
 import { STUser } from "./space-trader-user";
 
-export { STUser }
+export type { STUser }

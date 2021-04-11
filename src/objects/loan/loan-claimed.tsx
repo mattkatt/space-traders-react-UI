@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 import { STLoanClaimed } from "./loan-interface";
-import styles from './loan.module.css'
 import { Button } from "../../components/ui/buttons";
+import Loan, { LoanItem, LoanTitle } from "../../components/ui/loans";
+import { CreditsHelpers } from "../../helpers";
 
 
 interface ILoanClaimed {
@@ -15,16 +16,14 @@ const LoanClaimed: FC<ILoanClaimed> = ({ loan }) => {
         console.log('Repay Loan')
     }
 
-    const classNames = [styles.loan, styles.loanClaimed].concat(' ')
-
     return (
-        <figure className={ classNames }>
-            <h3 className={ styles.loanTitle }>{ loan.type }</h3>
-            <span>Loan Amount: { loan.repaymentAmount }</span>
-            <span>Due Date: { dueDate.toDateString() }</span>
-            <span>Status: { loan.status } days</span>
+        <Loan status="Claimed">
+            <LoanTitle>{ loan.type }</LoanTitle>
+            <LoanItem>Loan Amount: { CreditsHelpers.display(loan.repaymentAmount) }</LoanItem>
+            <LoanItem>Due Date: { dueDate.toDateString() }</LoanItem>
+            <LoanItem>Status: { loan.status }</LoanItem>
             <Button onClick={ repayLoan } content="Repay Loan" />
-        </figure>
+        </Loan>
     )
 }
 

@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 import { STLoanAvailable } from "./loan-interface";
-import styles from "./loan.module.css";
 import { Button } from "../../components/ui/buttons";
+import Loan, { LoanItem, LoanTitle } from "../../components/ui/loans";
+import { CreditsHelpers } from "../../helpers";
 
 
 interface ILoanAvailable {
@@ -13,17 +14,15 @@ const LoanAvailable: FC<ILoanAvailable> = ({ loan }) => {
         console.log('Loan Accepted')
     }
 
-    const classNames = [styles.loan, styles.loanAvailable].concat(' ')
-
     return (
-        <figure className={ classNames }>
-            <h3 className={ styles.loanTitle }>{ loan.type }</h3>
-            <span>Loan Amount: { loan.amount }</span>
-            <span>Rate: { loan.rate }</span>
-            <span>Term: {loan.termInDays} days</span>
-            <span>Collateral: { loan.collateralRequired ? 'YES' : 'NO' }</span>
+        <Loan status="Available">
+            <LoanTitle>{ loan.type }</LoanTitle>
+            <LoanItem>Loan Amount: { CreditsHelpers.display(loan.amount) }</LoanItem>
+            <LoanItem>Rate: { CreditsHelpers.display(loan.rate) }</LoanItem>
+            <LoanItem>Term: {loan.termInDays} days</LoanItem>
+            <LoanItem>Collateral: { loan.collateralRequired ? 'YES' : 'NO' }</LoanItem>
             <Button onClick={ acceptLoan } content="Accept Loan"/>
-        </figure>
+        </Loan>
     )
 }
 
