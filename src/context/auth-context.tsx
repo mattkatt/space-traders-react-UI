@@ -15,6 +15,7 @@ interface IAuth {
     checkLocalAuth: () => boolean
     login: (user: STUser, token: string) => void
     logout: () => void
+    updateUser: (user: STUser) => void
 }
 
 const emptyUser: STUser = {
@@ -92,11 +93,21 @@ function useAuth(): IAuth {
         localStorage.remove('auth')
     }
 
+    const updateUser = (user: STUser) => {
+        let currentAuth = auth as IAuthState
+
+        setAuth({
+            ...currentAuth,
+            user: user
+        })
+    }
+
     return {
         auth,
         checkLocalAuth,
         login,
         logout,
+        updateUser
     }
 }
 
