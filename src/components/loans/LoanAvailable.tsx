@@ -4,7 +4,7 @@ import { STLoanAvailable } from "../../objects/loan";
 import LoanTitle from "./LoanTitle";
 import LoanItem from "./LoanItem";
 import { CreditsHelpers } from "../../helpers";
-import { Button } from "../ui/buttons";
+import Button from "../ui/buttons";
 
 
 interface ILoanAvailable {

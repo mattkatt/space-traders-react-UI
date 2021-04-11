@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styles from './buttons.module.css'
 
+
 export interface IButton {
     content?: string
     compact?: boolean
@@ -11,31 +12,25 @@ interface IBasicButton extends IButton {
     type?: "Positive" | "Negative"
 }
 
-const Button: FC<IBasicButton> = ({
-    content,
-    type,
-    compact,
-    onClick,
-    children
-}) => {
+const Button: FC<IBasicButton> = ({ content, type, compact, onClick, children }) => {
     let classes = styles.button
 
     switch (type) {
         case "Positive":
-            classes += ` ${styles.positiveButton}`
+            classes += ` ${ styles.positiveButton }`
             break
         case "Negative":
-            classes += ` ${styles.negativeButton}`
+            classes += ` ${ styles.negativeButton }`
             break
     }
 
     if (compact) {
-        classes += ` ${styles.buttonCompact}`
+        classes += ` ${ styles.buttonCompact }`
     }
 
     return (
         <button type="button" className={ classes } onClick={ onClick }>
-            { content ?? children}
+            { content ?? children }
         </button>
     )
 }

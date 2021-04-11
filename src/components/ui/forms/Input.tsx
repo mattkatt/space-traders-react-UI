@@ -9,7 +9,7 @@ interface IInput {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const Input: FC<IInput> = ({ name, value, onChange}) => {
+const Input: FC<IInput> = ({ name, value, onChange }) => {
     return (
         <label className={ styles.formLabel }>
             <span>

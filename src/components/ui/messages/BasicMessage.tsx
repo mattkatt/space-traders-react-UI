@@ -1,5 +1,6 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC } from "react";
 import styles from './messages.module.css'
+
 
 export interface IMessage {
     message?: string
@@ -8,15 +9,9 @@ export interface IMessage {
 
 interface IBasicMessage extends IMessage {
     type: "Info" | "Error" | "Success"
-
 }
 
-const BasicMessage: FC<PropsWithChildren<IBasicMessage>> = ({
-    message,
-    type,
-    compact = false,
-    children
-}) => {
+const BasicMessage: FC<IBasicMessage> = ({ message, type, compact = false, children }) => {
     let classes = styles.message
 
     switch (type) {

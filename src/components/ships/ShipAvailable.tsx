@@ -4,7 +4,7 @@ import { STShipAvailable } from "../../objects/ship";
 import ShipItem from "./ShipItem";
 import ShipTitle from "./ShipTitle";
 import { CreditsHelpers } from "../../helpers";
-import { Button } from "../ui/buttons";
+import Button from "../ui/buttons";
 
 interface IShipAvailable {
     ship: STShipAvailable

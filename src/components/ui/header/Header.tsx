@@ -5,10 +5,7 @@ interface IHeader {
     title: string
 }
 
-const Header: FC<IHeader> = ({
-    title,
-    children
-}) => {
+const Header: FC<IHeader> = ({ title, children }) => {
     return (
         <header className={ styles.header }>
             <h1 className={ styles.headerTitle }>{ title }</h1>

@@ -7,7 +7,7 @@ import { ErrorMessage } from "../ui/messages";
 import { useSpaceTraderService } from "../../services";
 import { useAuth } from "../../context/auth-context";
 import { useSettings } from "../../context/settings-context";
-import { Button } from "../ui/buttons";
+import Button from "../ui/buttons";
 
 
 const UserLoginForm: FC = () => {
