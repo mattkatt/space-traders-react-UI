@@ -26,7 +26,7 @@ const ShipAvailable: FC<IShipAvailable> = ({ ship }) => {
         purchaseShip(location, ship.type).then(updatedUser => {
             updateUser(updatedUser)
         }).catch(error => {
-            alert(error.response.data.error.message)
+            alert(error.message)
         }).finally(() => {
             setPurchasing(false)
         })

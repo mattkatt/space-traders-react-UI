@@ -49,9 +49,19 @@ export default class RestfulProvider implements IRestfulProvider {
             axiosConfig['data'] = data
         }
 
-        const axiosCall = await axios(axiosConfig)
+        try {
+            const axiosCall = await axios(axiosConfig)
 
-        return axiosCall.data
+            return axiosCall.data
+        } catch (error) {
+            if (error.response) {
+                throw error.response.data.error
+            } else {
+                console.error(error)
+
+                throw Error("Unknown error")
+            }
+        }
     }
 
     async baseGetMethod<TReturn>(url: string, data?: TRestfulData): Promise<TReturn> {
