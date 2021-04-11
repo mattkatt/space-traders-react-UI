@@ -21,11 +21,9 @@ const ShipsView: FC = () => {
     })
 
     const renderUserShips = () => {
-        if (!auth.user.ships.length) {
-            return <InfoMessage compact message="You have no ships" />
-        }
-
-        return auth.user.ships.map(ship => {
+        return !auth.user.ships.length ? (
+            <InfoMessage compact message="You have no ships" />
+        ): auth.user.ships.map(ship => {
             return <ShipOwned ship={ ship } key={ ship.id } />
         })
     }
@@ -35,11 +33,9 @@ const ShipsView: FC = () => {
             return <p>Getting Ships...</p>
         }
 
-        if (!availableShips.length) {
-            return <InfoMessage compact message="No ships available" />
-        }
-
-        return availableShips.map(ship => {
+        return !availableShips.length ? (
+            <InfoMessage compact message="No ships available" />
+        ) : availableShips.map(ship => {
             return <ShipAvailable ship={ ship } key={ ship.type } />
         })
     }
