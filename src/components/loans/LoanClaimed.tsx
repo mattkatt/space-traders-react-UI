@@ -21,7 +21,7 @@ const LoanClaimed: FC<ILoanClaimed> = ({ loan, onRepay }) => {
             <LoanItem>Amount: { CreditsHelpers.display(loan.repaymentAmount) }</LoanItem>
             <LoanItem>Due Date: { dueDate.toDateString() }</LoanItem>
             <LoanItem>Status: { loan.status }</LoanItem>
-            <Button onClick={ onRepay } content="Repay Loan" />
+            <Button onClick={ onRepay } content="Repay" />
         </figure>
     )
 }

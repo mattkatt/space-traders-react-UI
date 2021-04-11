@@ -20,7 +20,7 @@ const LoanAvailable: FC<ILoanAvailable> = ({ loan, onClaim }) => {
             <LoanItem>Rate: { CreditsHelpers.display(loan.rate) }</LoanItem>
             <LoanItem>Term: {loan.termInDays} days</LoanItem>
             <LoanItem>Collateral: { loan.collateralRequired ? 'YES' : 'NO' }</LoanItem>
-            <Button onClick={ onClaim } content="Accept LoanClaimed"/>
+            <Button onClick={ onClaim } content="Claim" />
         </figure>
     )
 }
