@@ -11,7 +11,7 @@ import {
     ViewShipsResponse,
     PurchaseShipRequest,
     PurchaseGoodsRequest,
-    PurchaseGoodsResponse, BaseUserRequest
+    PurchaseGoodsResponse, BaseUserRequest, ViewMarketRequest, ViewMarketResponse
 } from './space-trader-provider-interfaces'
 
 
@@ -23,6 +23,7 @@ export interface ISpaceTraderEndpoints {
     claimLoan: RestfulPostEndpoint<ClaimLoanRequest, UserAccountResponse>
     shipsAvailable: RestfulGetEndpoint<ViewShipsRequest, ViewShipsResponse>,
     purchaseShip: RestfulPostEndpoint<PurchaseShipRequest, UserAccountResponse>
+    viewMarket: RestfulGetEndpoint<ViewMarketRequest, ViewMarketResponse>
     purchaseGoods: RestfulPostEndpoint<PurchaseGoodsRequest, PurchaseGoodsResponse>
 }
 
@@ -63,6 +64,10 @@ class SpaceTraderProvider extends RestfulProvider {
             }),
             purchaseShip: new RestfulPostEndpoint({
                 endpoint: "/users/$username/ships?token=$token&location=$location&type=$type",
+                provider: this
+            }),
+            viewMarket: new RestfulGetEndpoint({
+                endpoint: "/game/locations/$location/marketplace?token=$token",
                 provider: this
             }),
             purchaseGoods: new RestfulPostEndpoint({

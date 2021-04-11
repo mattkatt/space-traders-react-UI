@@ -7,6 +7,7 @@ interface ISpaceTraderService {
     generateUserToken: (username: string) => Promise<string>
     getUserDetails: (username: string, token: string) => Promise<STUser>
     getAvailableLoans: (token: string) => Promise<STLoanAvailable[]>
+    //claimLoan: () => Promise<any>
 }
 
 export const spaceTraderService = (): ISpaceTraderService => {
@@ -36,7 +37,7 @@ export const spaceTraderService = (): ISpaceTraderService => {
     }
 
     const getAvailableLoans = async (token: string): Promise<STLoanAvailable[]> => {
-        const response = await provider.endpoints.loans.get({
+        const response = await provider.endpoints.loansAvailable.get({
             token: token
         })
 

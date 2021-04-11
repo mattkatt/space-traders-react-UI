@@ -2,6 +2,7 @@ import { TRestfulData } from "../restful-provider/restful-provider";
 import { STUser } from "../../objects/user";
 import { STLoanAvailable } from "../../objects/loan";
 import { STShipAvailable, STShipOwned } from "../../objects/ship";
+import { STLocation } from "../../objects/location";
 
 
 export interface BaseUserRequest extends TRestfulData {
@@ -44,6 +45,14 @@ export interface ViewShipsResponse {
 export interface PurchaseShipRequest extends UserAccountRequest {
     location: string
     type: string
+}
+
+export interface ViewMarketRequest extends BaseTokenRequest {
+    location: string
+}
+
+export interface ViewMarketResponse {
+    location: STLocation
 }
 
 export interface PurchaseGoodsRequest extends UserAccountRequest {
