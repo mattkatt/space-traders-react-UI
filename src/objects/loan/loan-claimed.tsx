@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { STLoanClaimed } from "./loan-interface";
 import { Button } from "../../components/ui/buttons";
-import Loan, { LoanItem, LoanTitle } from "../../components/ui/loans";
+import Loan, { LoanItem, LoanTitle } from "../../components/loans";
 import { CreditsHelpers } from "../../helpers";
 
 

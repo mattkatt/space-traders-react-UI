@@ -21,10 +21,10 @@ export interface STShipAvailable extends STShip {
 }
 
 export interface STShipOwned extends STShip {
-    cargo: STCargo[],
-    id: string,
-    location: string,
-    spaceAvailable: number,
-    x: number,
+    cargo: STCargo[]
+    id: string
+    location: string
+    spaceAvailable: number
+    x: number
     y: number
 }

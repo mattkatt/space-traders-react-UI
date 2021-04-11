@@ -14,6 +14,11 @@
     border-color: var(--green);
 }
 
+.shipTitle {
+    text-align: center;
+    margin: 0 0 4px 0;
+}
+
 .shipItem {
     margin-bottom: 4px;
 }
