@@ -22,6 +22,12 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
     const provider = getSpaceTraderProvider()
     const { auth } = useAuth()
 
+    const checkAuth = () => {
+        if (!auth.isAuth) {
+            throw Error("No Auth User")
+        }
+    }
+
     const checkGameStatus = async (): Promise<string> => {
         const response = await provider.endpoints.gameStatus.get()
 
@@ -46,6 +52,8 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
     }
 
     const getAvailableLoans = async (): Promise<STLoanAvailable[]> => {
+        checkAuth()
+
         const response = await provider.endpoints.loansAvailable.get({
             token: auth.token
         })
@@ -54,6 +62,8 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
     }
 
     const claimLoan = async (type: string): Promise<STUser> => {
+        checkAuth()
+
         const response = await provider.endpoints.claimLoan.post({
             username: auth.user.username,
             token: auth.token,
@@ -64,6 +74,8 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
     }
 
     const getAvailableShips = async (shipClass: string): Promise<STShipAvailable[]> => {
+        checkAuth()
+
         const response = await provider.endpoints.shipsAvailable.get({
             token: auth.token,
             class: shipClass,
@@ -73,6 +85,8 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
     }
 
     const purchaseShip = async (location: string, type: string): Promise<STUser> => {
+        checkAuth()
+
         const response = await provider.endpoints.purchaseShip.post({
             username: auth.user.username,
             token: auth.token,
@@ -84,6 +98,8 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
     }
 
     const viewMarket = async (location: string): Promise<STGood[]> => {
+        checkAuth()
+
         const response = await provider.endpoints.viewMarket.get({
             token: auth.token,
             location: location,
@@ -93,6 +109,8 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
     }
 
     const purchaseGoods = async (good: string, shipId: string, quantity: number): Promise<PurchaseGoodsResponse> => {
+        checkAuth()
+
         return await provider.endpoints.purchaseGoods.post({
             username: auth.user.username,
             token: auth.token,
