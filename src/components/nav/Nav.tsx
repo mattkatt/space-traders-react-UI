@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styles from './nav.module.css'
 import { RouteNav, routeConfig } from "../../router";
 import { useAuth } from "../../context/auth-context";
+import { UserNavDisplay } from "../user";
 
 interface INav {
     routes: Array<routeConfig>
@@ -21,6 +22,8 @@ const Nav: FC<INav> = ({ routes }) => {
                     <Link to="/" onClick={ logout }>
                         Logout
                     </Link>
+
+                    <UserNavDisplay />
                 </>
             ) : null }
         </nav>

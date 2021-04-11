@@ -12,6 +12,7 @@ export const Router: FC<routerConfig> = ({ routes }) => {
         <BrowserRouter>
             <Header title="Space Trader">
                 <Nav routes={ routes } />
+
             </Header>
 
             <Container>
