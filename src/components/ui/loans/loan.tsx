@@ -12,9 +12,9 @@ const Loan: FC<ILoan> = ({ status, children }) => {
 
         switch (status) {
             case "Available":
-                return name + ' ' + styles.loanAvailable
+                return `${ name} ${ styles.loanAvailable }`
             case "Claimed":
-                return name + ' ' + styles.loanClaimed
+                return `${ name} ${ styles.loanClaimed }`
         }
     }
 

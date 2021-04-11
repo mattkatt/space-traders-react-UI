@@ -1,3 +1,6 @@
+import { STCargo } from "../goods";
+
+
 interface STShip {
     class: string
     manufacturer: string
@@ -18,7 +21,7 @@ export interface STShipAvailable extends STShip {
 }
 
 export interface STShipOwned extends STShip {
-    cargo: any[],
+    cargo: STCargo[],
     id: string,
     location: string,
     spaceAvailable: number,

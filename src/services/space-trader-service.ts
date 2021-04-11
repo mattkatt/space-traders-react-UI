@@ -2,7 +2,7 @@ import { getSpaceTraderProvider } from "../providers/space-trader-provider/space
 import { STUser } from "../objects/user";
 import { STLoanAvailable } from "../objects/loan";
 import { STShipAvailable } from "../objects/ship";
-import { STGood } from "../objects/goods";
+import { STGoods } from "../objects/goods";
 import { PurchaseGoodsResponse } from "../providers/space-trader-provider/space-trader-provider-interfaces";
 import { useAuth } from "../context/auth-context";
 
@@ -14,7 +14,7 @@ interface ISpaceTraderService {
     claimLoan: (type: string) => Promise<STUser>
     getAvailableShips: (shipClass: string) => Promise<STShipAvailable[]>
     purchaseShip: (location: string, type: string) => Promise<STUser>
-    viewMarket: (location: string) => Promise<STGood[]>
+    viewMarket: (location: string) => Promise<STGoods[]>
     purchaseGoods: (good: string, shipId: string, quantity: number) => Promise<any>
 }
 
@@ -97,7 +97,7 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
         return response.user
     }
 
-    const viewMarket = async (location: string): Promise<STGood[]> => {
+    const viewMarket = async (location: string): Promise<STGoods[]> => {
         checkAuth()
 
         const response = await provider.endpoints.viewMarket.get({

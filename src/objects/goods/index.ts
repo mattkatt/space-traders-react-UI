@@ -1,4 +1,4 @@
-import { STGood } from "./goods-interface";
+import { STCargo, STGoods, STOrder } from "./goods-interface";
 
 
-export type { STGood }
+export type { STCargo, STGoods, STOrder }

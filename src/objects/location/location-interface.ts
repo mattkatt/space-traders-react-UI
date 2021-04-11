@@ -1,4 +1,4 @@
-import { STGood } from "../goods";
+import { STGoods } from "../goods";
 
 
 export interface STLocation {
@@ -7,5 +7,5 @@ export interface STLocation {
     type: string
     x: number
     y: number
-    marketplace: STGood[]
+    marketplace: STGoods[]
 }

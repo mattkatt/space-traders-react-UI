@@ -3,6 +3,7 @@ import { STUser } from "../../objects/user";
 import { STLoanAvailable } from "../../objects/loan";
 import { STShipAvailable, STShipOwned } from "../../objects/ship";
 import { STLocation } from "../../objects/location";
+import { STOrder } from "../../objects/goods";
 
 
 export interface BaseUserRequest extends TRestfulData {
@@ -63,6 +64,6 @@ export interface PurchaseGoodsRequest extends UserAccountRequest {
 
 export interface PurchaseGoodsResponse {
     credits: number
-    order: any[]
+    order: STOrder
     ship: STShipOwned
 }
