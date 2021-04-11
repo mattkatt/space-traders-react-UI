@@ -4,6 +4,7 @@ import { STShipOwned } from "../../objects/ship";
 import ShipItem from "./ShipItem";
 import ShipTitle from "./ShipTitle";
 
+
 interface IShipOwned {
     ship: STShipOwned
 }

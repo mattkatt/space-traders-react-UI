@@ -6,6 +6,7 @@ import ShipTitle from "./ShipTitle";
 import { CreditsHelpers } from "../../helpers";
 import Button from "../ui/buttons";
 
+
 interface IShipAvailable {
     ship: STShipAvailable
     onPurchase: (location: string) => void
