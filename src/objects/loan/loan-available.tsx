@@ -1,8 +1,6 @@
 import React, { FC } from "react";
 import { STLoanAvailable } from "./loan-interface";
-import { Button } from "../../components/ui/buttons";
-import Loan, { LoanItem, LoanTitle } from "../../components/loans";
-import { CreditsHelpers } from "../../helpers";
+import Loan from "../../components/loans";
 
 
 interface ILoanAvailable {
@@ -10,19 +8,12 @@ interface ILoanAvailable {
 }
 
 const LoanAvailable: FC<ILoanAvailable> = ({ loan }) => {
-    const acceptLoan = () => {
-        console.log('Loan Accepted')
+    const claimLoan = () => {
+        console.log('LoanClaimed Accepted')
     }
 
     return (
-        <Loan status="Available">
-            <LoanTitle>{ loan.type }</LoanTitle>
-            <LoanItem>Loan Amount: { CreditsHelpers.display(loan.amount) }</LoanItem>
-            <LoanItem>Rate: { CreditsHelpers.display(loan.rate) }</LoanItem>
-            <LoanItem>Term: {loan.termInDays} days</LoanItem>
-            <LoanItem>Collateral: { loan.collateralRequired ? 'YES' : 'NO' }</LoanItem>
-            <Button onClick={ acceptLoan } content="Accept Loan"/>
-        </Loan>
+        <Loan.Available loan={ loan } onClaim={ claimLoan }/>
     )
 }
 

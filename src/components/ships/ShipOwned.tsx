@@ -4,11 +4,11 @@ import { STShipOwned } from "../../objects/ship";
 import ShipItem from "./ShipItem";
 import ShipTitle from "./ShipTitle";
 
-interface IShip {
+interface IShipOwned {
     ship: STShipOwned
 }
 
-const ShipOwned: FC<IShip> = ({ ship }) => {
+const ShipOwned: FC<IShipOwned> = ({ ship }) => {
     const currentSpace = `${ ship.cargo.length }/${ ship.maxCargo }`
 
     const goods = ship.cargo.map(goods => (

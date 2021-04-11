@@ -6,12 +6,12 @@ import ShipTitle from "./ShipTitle";
 import { CreditsHelpers } from "../../helpers";
 import { Button } from "../ui/buttons";
 
-interface IShip {
+interface IShipAvailable {
     ship: STShipAvailable
     onPurchase: (location: string) => void
 }
 
-const ShipAvailable: FC<IShip> = ({ ship, onPurchase }) => {
+const ShipAvailable: FC<IShipAvailable> = ({ ship, onPurchase }) => {
     const locations = ship.purchaseLocations.map(location => (
         <tr key={ location.location }>
             <td>{ location.location }</td>

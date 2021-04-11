@@ -1,6 +1,10 @@
-import Loan from "./loan"
-import LoanItem from "./loan-item";
-import LoanTitle from "./loan-title";
+import LoanAvailable from "./LoanAvailable";
+import LoanClaimed from "./LoanClaimed"
+
+
+const Loan = {
+    Available: LoanAvailable,
+    Claimed: LoanClaimed
+}
 
 export default Loan
-export { LoanItem, LoanTitle }
