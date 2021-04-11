@@ -8,7 +8,7 @@ interface ILocalStorageService {
     clear: () => void
 }
 
-export const localStorageService = (): ILocalStorageService => {
+export const useLocalStorageService = (): ILocalStorageService => {
     const provider = getLocalStorageProvider()
 
     const storage = (): Storage => {

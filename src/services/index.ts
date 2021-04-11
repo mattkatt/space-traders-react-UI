@@ -1,4 +1,4 @@
-import { localStorageService } from "./local-storage-service";
-import { spaceTraderService } from "./space-trader-service";
+import { useLocalStorageService } from "./local-storage-service";
+import { useSpaceTraderService } from "./space-trader-service";
 
-export { localStorageService, spaceTraderService }
+export { useLocalStorageService, useSpaceTraderService }

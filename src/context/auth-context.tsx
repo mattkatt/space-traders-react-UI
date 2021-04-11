@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import { STUser } from "../objects/user";
 import { useSettings } from "./settings-context";
-import { localStorageService } from "../services";
+import { useLocalStorageService } from "../services";
 
 
 interface IAuthState {
@@ -42,7 +42,7 @@ function useAuth(): IAuth {
     // @ts-ignore
     const [auth, setAuth] = context
     const { settings } = useSettings()
-    const localStorage = localStorageService()
+    const localStorage = useLocalStorageService()
 
     const setLoggedInUser = (user: STUser, token: string) => {
         setAuth({

@@ -1,17 +1,26 @@
 import { getSpaceTraderProvider } from "../providers/space-trader-provider/space-trader-provider";
 import { STUser } from "../objects/user";
 import { STLoanAvailable } from "../objects/loan";
+import { STShipAvailable } from "../objects/ship";
+import { STGood } from "../objects/goods";
+import { PurchaseGoodsResponse } from "../providers/space-trader-provider/space-trader-provider-interfaces";
+import { useAuth } from "../context/auth-context";
 
 interface ISpaceTraderService {
     checkGameStatus: () => Promise<string>
     generateUserToken: (username: string) => Promise<string>
     getUserDetails: (username: string, token: string) => Promise<STUser>
-    getAvailableLoans: (token: string) => Promise<STLoanAvailable[]>
-    //claimLoan: () => Promise<any>
+    getAvailableLoans: () => Promise<STLoanAvailable[]>
+    claimLoan: (type: string) => Promise<STUser>
+    getAvailableShips: (shipClass: string) => Promise<STShipAvailable[]>
+    purchaseShip: (location: string, type: string) => Promise<STUser>
+    viewMarket: (location: string) => Promise<STGood[]>
+    purchaseGoods: (good: string, shipId: string, quantity: number) => Promise<any>
 }
 
-export const spaceTraderService = (): ISpaceTraderService => {
+export const useSpaceTraderService = (): ISpaceTraderService => {
     const provider = getSpaceTraderProvider()
+    const { auth } = useAuth()
 
     const checkGameStatus = async (): Promise<string> => {
         const response = await provider.endpoints.gameStatus.get()
@@ -36,18 +45,72 @@ export const spaceTraderService = (): ISpaceTraderService => {
         return response.user
     }
 
-    const getAvailableLoans = async (token: string): Promise<STLoanAvailable[]> => {
+    const getAvailableLoans = async (): Promise<STLoanAvailable[]> => {
         const response = await provider.endpoints.loansAvailable.get({
-            token: token
+            token: auth.token
         })
 
         return response.loans
+    }
+
+    const claimLoan = async (type: string): Promise<STUser> => {
+        const response = await provider.endpoints.claimLoan.post({
+            username: auth.user.username,
+            token: auth.token,
+            type: type,
+        })
+
+        return response.user
+    }
+
+    const getAvailableShips = async (shipClass: string): Promise<STShipAvailable[]> => {
+        const response = await provider.endpoints.shipsAvailable.get({
+            token: auth.token,
+            class: shipClass,
+        })
+
+        return response.ships
+    }
+
+    const purchaseShip = async (location: string, type: string): Promise<STUser> => {
+        const response = await provider.endpoints.purchaseShip.post({
+            username: auth.user.username,
+            token: auth.token,
+            location: location,
+            type: type,
+        })
+
+        return response.user
+    }
+
+    const viewMarket = async (location: string): Promise<STGood[]> => {
+        const response = await provider.endpoints.viewMarket.get({
+            token: auth.token,
+            location: location,
+        })
+
+        return response.location.marketplace
+    }
+
+    const purchaseGoods = async (good: string, shipId: string, quantity: number): Promise<PurchaseGoodsResponse> => {
+        return await provider.endpoints.purchaseGoods.post({
+            username: auth.user.username,
+            token: auth.token,
+            shipId: shipId,
+            good: good,
+            quantity: quantity,
+        })
     }
 
     return {
         checkGameStatus,
         generateUserToken,
         getUserDetails,
-        getAvailableLoans
+        getAvailableLoans,
+        claimLoan,
+        getAvailableShips,
+        purchaseShip,
+        viewMarket,
+        purchaseGoods
     }
 }

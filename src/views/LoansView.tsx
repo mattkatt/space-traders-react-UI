@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { spaceTraderService } from "../services/space-trader-service";
+import { useSpaceTraderService } from "../services";
 import { useAuth } from "../context/auth-context";
 import { LoanAvailable, LoanClaimed, STLoanAvailable } from "../objects/loan";
 import { InfoMessage } from "../components/ui/messages";
@@ -7,13 +7,13 @@ import { InfoMessage } from "../components/ui/messages";
 
 const LoansView: FC = () => {
     const { auth } = useAuth()
-    const { getAvailableLoans } = spaceTraderService()
+    const { getAvailableLoans } = useSpaceTraderService()
     const [ queryAvailableLoans, setQueryAvailableLoans] = useState(false)
     const [ availableLoans, setAvailableLoans ] = useState<STLoanAvailable[]>([])
 
     useEffect(() => {
         if (!queryAvailableLoans) {
-            getAvailableLoans(auth.token).then(loans => {
+            getAvailableLoans().then(loans => {
                 setAvailableLoans(loans)
                 setQueryAvailableLoans(true)
             })

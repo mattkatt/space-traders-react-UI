@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Form, { Input } from "../ui/forms"
 import { ErrorMessage } from "../ui/messages";
 
-import { spaceTraderService } from "../../services";
+import { useSpaceTraderService } from "../../services";
 import { useAuth } from "../../context/auth-context";
 import { useSettings } from "../../context/settings-context";
 import { Button } from "../ui/buttons";
@@ -13,7 +13,7 @@ import { Button } from "../ui/buttons";
 const UserLoginForm: FC = () => {
     const { settings } = useSettings()
     const { login } = useAuth()
-    const { getUserDetails } = spaceTraderService()
+    const { getUserDetails } = useSpaceTraderService()
     const [ formState, setFormState ] = useState({
         username: settings.defaultUser.username ?? '',
         token: settings.defaultUser.token ?? ''
