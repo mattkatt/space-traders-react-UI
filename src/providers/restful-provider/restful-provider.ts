@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 
 
 export interface TRestfulData {
-    [key:string]: string
+    [key:string]: string | number
 }
 
 export interface IRestfulProvider {
@@ -36,7 +36,7 @@ export default class RestfulProvider implements IRestfulProvider {
                     throw new Error('Incorrect/Null value passed to endpoint')
                 }
 
-                return data[attribute]
+                return data[attribute].toString()
             })
         }
 
