@@ -27,3 +27,9 @@ export class RestfulPostEndpoint<TData extends TRestfulData, TReturn> extends Re
         return this.provider.basePostMethod(this.endpoint, data)
     }
 }
+
+export class RestfulPutEndpoint<TData extends TRestfulData, TReturn> extends RestfulEndpoint {
+    async put(data: TData): Promise<TReturn> {
+        return this.provider.basePutMethod(this.endpoint, data)
+    }
+}

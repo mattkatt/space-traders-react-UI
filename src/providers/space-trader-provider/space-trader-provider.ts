@@ -1,5 +1,5 @@
 import RestfulProvider, { RestfulProviderProps } from "../restful-provider/restful-provider";
-import { RestfulGetEndpoint, RestfulPostEndpoint } from "../restful-provider/restful-endpoint";
+import { RestfulGetEndpoint, RestfulPostEndpoint, RestfulPutEndpoint } from "../restful-provider/restful-endpoint";
 import {
     UserAccountRequest,
     AccessTokenResponse,
@@ -11,7 +11,7 @@ import {
     ViewShipsResponse,
     PurchaseShipRequest,
     PurchaseGoodsRequest,
-    PurchaseGoodsResponse, BaseUserRequest, ViewMarketRequest, ViewMarketResponse
+    PurchaseGoodsResponse, BaseUserRequest, ViewMarketRequest, ViewMarketResponse, RepayLoanRequest
 } from './space-trader-provider-interfaces'
 
 
@@ -21,6 +21,7 @@ export interface ISpaceTraderEndpoints {
     userAccount: RestfulGetEndpoint<UserAccountRequest, UserAccountResponse>
     loansAvailable: RestfulGetEndpoint<BaseTokenRequest, AvailableLoanResponse>
     claimLoan: RestfulPostEndpoint<ClaimLoanRequest, UserAccountResponse>
+    repayLoan: RestfulPutEndpoint<RepayLoanRequest, UserAccountResponse>
     shipsAvailable: RestfulGetEndpoint<ViewShipsRequest, ViewShipsResponse>,
     purchaseShip: RestfulPostEndpoint<PurchaseShipRequest, UserAccountResponse>
     viewMarket: RestfulGetEndpoint<ViewMarketRequest, ViewMarketResponse>
@@ -56,6 +57,10 @@ class SpaceTraderProvider extends RestfulProvider {
             }),
             claimLoan: new RestfulPostEndpoint({
                 endpoint: "/users/$username/loans?token=$token&type=$type",
+                provider: this
+            }),
+            repayLoan: new RestfulPutEndpoint({
+                endpoint: "/users/$username/loans/$loanId?token=$token",
                 provider: this
             }),
             shipsAvailable: new RestfulGetEndpoint({

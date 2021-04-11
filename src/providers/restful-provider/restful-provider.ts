@@ -9,13 +9,14 @@ export interface IRestfulProvider {
     source: string
     baseGetMethod: <TReturn>(url: string, data?: TRestfulData) => Promise<TReturn>
     basePostMethod: <TReturn>(url: string, data: TRestfulData) => Promise<TReturn>
+    basePutMethod: <TReturn>(url: string, data: TRestfulData) => Promise<TReturn>
 }
 
 export interface RestfulProviderProps {
     source: string
 }
 
-export type RestfulMethods = "GET" | "POST"
+export type RestfulMethods = "GET" | "POST" | "PUT"
 
 export default class RestfulProvider implements IRestfulProvider {
     source: string
@@ -70,5 +71,9 @@ export default class RestfulProvider implements IRestfulProvider {
 
     async basePostMethod<TReturn>(url: string, data: TRestfulData): Promise<TReturn> {
         return await this.makeCall(url, "POST", data)
+    }
+
+    async basePutMethod<TReturn>(url: string, data: TRestfulData): Promise<TReturn> {
+        return await this.makeCall(url, "PUT", data)
     }
 }

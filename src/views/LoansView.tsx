@@ -21,11 +21,9 @@ const LoansView: FC = () => {
     })
 
     const renderUserLoans = () => {
-        if (!auth.user.loans.length) {
-            return <InfoMessage compact message="You have no loans" />
-        }
-
-        return auth.user.loans.map(loan => {
+        return !auth.user.loans.length ? (
+             <InfoMessage compact message="You have no loans" />
+        ) : auth.user.loans.map(loan => {
             return <LoanClaimed loan={ loan } key={ loan.id }/>
         })
     }
@@ -35,11 +33,9 @@ const LoansView: FC = () => {
             return <p>Getting Loans...</p>
         }
 
-        if (!availableLoans.length) {
-            return <InfoMessage compact message="No loans available" />
-        }
-
-        return availableLoans.map(loan => {
+        return !availableLoans.length ? (
+            <InfoMessage compact message="No loans available" />
+        ) : availableLoans.map(loan => {
             return <LoanAvailable loan={ loan } key={ loan.type } />
         })
     }

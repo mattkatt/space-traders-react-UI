@@ -1,6 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { STLoanAvailable } from "./loan-interface";
 import Loan from "../../components/loans";
+import { useSpaceTraderService } from "../../services";
+import { useAuth } from "../../context/auth-context";
 
 
 interface ILoanAvailable {
@@ -8,12 +10,28 @@ interface ILoanAvailable {
 }
 
 const LoanAvailable: FC<ILoanAvailable> = ({ loan }) => {
-    const claimLoan = () => {
-        console.log('LoanClaimed Accepted')
+    const { claimLoan } = useSpaceTraderService()
+    const { updateUser } = useAuth()
+    const [claiming, setClaiming] = useState(false)
+
+    const claim = () => {
+        if (claiming) {
+            return
+        }
+
+        setClaiming(true)
+
+        claimLoan(loan.type).then(updatedUser => {
+            updateUser(updatedUser)
+        }).catch(error => {
+            alert(error.message)
+        }).finally(() => {
+            setClaiming(false)
+        })
     }
 
     return (
-        <Loan.Available loan={ loan } onClaim={ claimLoan }/>
+        <Loan.Available loan={ loan } onClaim={ claim }/>
     )
 }
 

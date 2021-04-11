@@ -12,6 +12,7 @@ interface ISpaceTraderService {
     getUserDetails: (username: string, token: string) => Promise<STUser>
     getAvailableLoans: () => Promise<STLoanAvailable[]>
     claimLoan: (type: string) => Promise<STUser>
+    repayLoan: (loanId: string) => Promise<STUser>
     getAvailableShips: (shipClass: string) => Promise<STShipAvailable[]>
     purchaseShip: (location: string, type: string) => Promise<STUser>
     viewMarket: (location: string) => Promise<STGoods[]>
@@ -73,6 +74,18 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
         return response.user
     }
 
+    const repayLoan = async (loanId: string): Promise<STUser> => {
+        checkAuth()
+
+        const response = await provider.endpoints.repayLoan.put({
+            username: auth.user.username,
+            token: auth.token,
+            loanId: loanId,
+        })
+
+        return response.user
+    }
+
     const getAvailableShips = async (shipClass: string): Promise<STShipAvailable[]> => {
         checkAuth()
 
@@ -126,6 +139,7 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
         getUserDetails,
         getAvailableLoans,
         claimLoan,
+        repayLoan,
         getAvailableShips,
         purchaseShip,
         viewMarket,

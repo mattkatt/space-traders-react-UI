@@ -35,6 +35,10 @@ export interface ClaimLoanRequest extends UserAccountRequest {
     type: string
 }
 
+export interface RepayLoanRequest extends UserAccountRequest {
+    loanId: string
+}
+
 export interface ViewShipsRequest extends BaseTokenRequest {
     class: string
 }
