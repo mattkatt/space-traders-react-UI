@@ -1,11 +1,7 @@
 import React, { FC } from "react";
-import { routerConfig } from "./browser-router";
 import { NavLink } from "react-router-dom";
+import { IRouteNav } from "./router-interfaces";
 
-
-interface IRouteNav extends routerConfig {
-    activeClass?: string
-}
 
 const RouteNav: FC<IRouteNav> = ({ routes, activeClass }) => {
     const genNavLinks = () => {

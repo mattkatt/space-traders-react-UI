@@ -4,20 +4,10 @@ import RouteSwitch from "./router-switch";
 import Header from "../components/ui/header";
 import Nav from "../components/nav";
 import Container from "../components/ui/container";
+import { routerConfig } from "./router-interfaces";
 
 
-interface routeConfig {
-    name: string
-    path: string,
-    Render: any,
-    private: boolean
-}
-
-interface routerConfig {
-    routes: routeConfig[]
-}
-
-const Router: FC<routerConfig> = ({ routes }) => {
+export const Router: FC<routerConfig> = ({ routes }) => {
     return (
         <BrowserRouter>
             <Header title="Space Trader">
@@ -30,6 +20,3 @@ const Router: FC<routerConfig> = ({ routes }) => {
         </BrowserRouter>
     )
 }
-
-export default Router
-export { routerConfig, routeConfig }
