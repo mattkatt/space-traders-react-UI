@@ -3,6 +3,7 @@ import { useAuth } from "../context/auth-context";
 import { ShipAvailable, ShipOwned, STShipAvailable } from "../objects/ship";
 import { useSpaceTraderService } from "../services";
 import { InfoMessage } from "../components/ui/messages";
+import { ItemContainer } from "../components/ui/containers";
 
 
 const ShipsView: FC = () => {
@@ -21,32 +22,44 @@ const ShipsView: FC = () => {
     })
 
     const renderUserShips = () => {
-        return !auth.user.ships.length ? (
-            <InfoMessage compact message="You have no ships" />
-        ): auth.user.ships.map(ship => {
-            return <ShipOwned ship={ ship } key={ ship.id } />
+        return auth.user.ships.map(ship => {
+            return (
+                <ShipOwned ship={ ship } key={ ship.id } />
+            )
         })
     }
 
     const renderAvailableShips = () => {
         if (!queryAvailableShips) {
-            return <p>Getting Ships...</p>
+            return <p style={{ margin: "8px" }}>Getting Ships...</p>
         }
 
-        return !availableShips.length ? (
-            <InfoMessage compact message="No ships available" />
-        ) : availableShips.map(ship => {
-            return <ShipAvailable ship={ ship } key={ ship.type } />
+        return availableShips.map(ship => {
+            return (
+                <ShipAvailable ship={ ship } key={ ship.type } />
+            )
         })
     }
 
     return (
         <section>
             <h2>Your Ships</h2>
-            { renderUserShips() }
+            { !auth.user.ships.length ? (
+                <InfoMessage compact message="You have no ships" />
+            ): (
+                <ItemContainer>
+                    { renderUserShips() }
+                </ItemContainer>
+            )}
 
             <h2>Available Ships</h2>
-            { renderAvailableShips() }
+            { !availableShips.length ? (
+                <InfoMessage compact message="No ships available" />
+            ) : (
+                <ItemContainer>
+                    { renderAvailableShips() }
+                </ItemContainer>
+            )}
         </section>
     )
 }

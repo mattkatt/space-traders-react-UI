@@ -3,6 +3,7 @@ import { useSpaceTraderService } from "../services";
 import { useAuth } from "../context/auth-context";
 import { LoanAvailable, LoanClaimed, STLoanAvailable } from "../objects/loan";
 import { InfoMessage } from "../components/ui/messages";
+import { ItemContainer } from "../components/ui/containers";
 
 
 const LoansView: FC = () => {
@@ -21,32 +22,44 @@ const LoansView: FC = () => {
     })
 
     const renderUserLoans = () => {
-        return !auth.user.loans.length ? (
-             <InfoMessage compact message="You have no loans" />
-        ) : auth.user.loans.map(loan => {
-            return <LoanClaimed loan={ loan } key={ loan.id }/>
+        return auth.user.loans.map(loan => {
+            return (
+                <LoanClaimed loan={ loan } key={ loan.id }/>
+            )
         })
     }
 
     const renderAvailableLoans = () => {
         if (!queryAvailableLoans) {
-            return <p>Getting Loans...</p>
+            return <p style={{ margin: "8px" }}>Getting Loans...</p>
         }
 
-        return !availableLoans.length ? (
-            <InfoMessage compact message="No loans available" />
-        ) : availableLoans.map(loan => {
-            return <LoanAvailable loan={ loan } key={ loan.type } />
+        return availableLoans.map(loan => {
+            return (
+                <LoanAvailable loan={ loan } key={ loan.type } />
+            )
         })
     }
 
     return (
         <section>
             <h2>Your Loans</h2>
-            { renderUserLoans() }
+            { !auth.user.loans.length ? (
+                <InfoMessage compact message="You have no loans" />
+            ) : (
+                <ItemContainer>
+                    { renderUserLoans() }
+                </ItemContainer>
+            )}
 
             <h2>Available Loans</h2>
-            { renderAvailableLoans() }
+            { !availableLoans.length ? (
+                <InfoMessage compact message="No loans available" />
+            ) : (
+                <ItemContainer>
+                    { renderAvailableLoans() }
+                </ItemContainer>
+            )}
         </section>
     )
 }
