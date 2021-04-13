@@ -9,28 +9,21 @@ interface IModal {
     onDismiss?: () => void
 }
 
-const Modal: FC<IModal> = ({
-    title,
-    content,
-    children,
-    footer,
-    display,
-    onDismiss
-}) => {
+const Modal: FC<IModal> = (props) => {
     const [modalState, setModalState] = useState(false)
 
     useEffect(() => {
-        if (display) {
-            setModalState(display)
+        if (props.display) {
+            setModalState(props.display)
         }
-    }, [display])
+    }, [props.display])
 
 
     const dismissModal = () => {
         setModalState(false)
 
-        if (onDismiss) {
-            onDismiss()
+        if (props.onDismiss) {
+            props.onDismiss()
         }
     }
 
@@ -42,15 +35,15 @@ const Modal: FC<IModal> = ({
         }
     }
 
-    const modalTitle = !title ? null : (
+    const modalTitle = !props.title ? null : (
         <h3 className={ styles.modalTitle }>
-            { title }
+            { props.title }
         </h3>
     )
 
-    const modalFooter = !footer ? null : (
+    const modalFooter = !props.footer ? null : (
         <div className={ styles.modalFooter }>
-            { footer }
+            { props.footer }
         </div>
     )
 
@@ -60,7 +53,7 @@ const Modal: FC<IModal> = ({
                 { modalTitle }
 
                 <div className={ styles.modalBody }>
-                    { content ?? children }
+                    { props.content ?? props.children }
                 </div>
 
                 { modalFooter }
