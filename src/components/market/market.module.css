@@ -1,0 +1,16 @@
+.market {
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+}
+
+.market .good {
+    padding: 4px;
+    margin: 2px;
+    border: 1px solid var(--grey)
+}
+
+.market .good .item {
+    display: inline-block;
+    margin-right: 4px;
+}
