@@ -1,8 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styles from "./ship.module.css";
 import { STShipOwned } from "../../objects/ship";
 import ShipItem from "./ShipItem";
 import ShipTitle from "./ShipTitle";
+import Modal from "../modal";
+import Market from "../market";
+import Button from "../ui/buttons";
 
 
 interface IShipOwned {
@@ -10,6 +13,7 @@ interface IShipOwned {
 }
 
 const ShipOwned: FC<IShipOwned> = ({ ship }) => {
+    const [modal, setModal] = useState(false)
     const currentSpace = `${ ship.cargo.length }/${ ship.maxCargo }`
 
     const goods = ship.cargo.map(goods => (
@@ -49,6 +53,16 @@ const ShipOwned: FC<IShipOwned> = ({ ship }) => {
                     ) }
                 </tbody>
             </table>
+
+            { !ship.location ? null : (
+                <>
+                    <hr />
+                    <Button onClick={ () => setModal(true) } content="Show Market"/>
+                    <Modal display={ modal } onDismiss={ () => setModal(false) } title="Market">
+                        <Market location={ ship.location } shipId={ ship.id } />
+                    </Modal>
+                </>
+            )}
         </figure>
     )
 }
