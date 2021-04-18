@@ -7,5 +7,5 @@ export interface STLocation {
     type: string
     x: number
     y: number
-    marketplace: STGoods[]
+    marketplace?: STGoods[]
 }

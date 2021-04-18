@@ -11,7 +11,15 @@ import {
     ViewShipsResponse,
     PurchaseShipRequest,
     PurchaseGoodsRequest,
-    PurchaseGoodsResponse, BaseUserRequest, ViewMarketRequest, ViewMarketResponse, RepayLoanRequest
+    PurchaseGoodsResponse,
+    BaseUserRequest,
+    ViewMarketRequest,
+    ViewMarketResponse,
+    RepayLoanRequest,
+    ViewSystemsResponse,
+    ViewSystemLocationsRequest,
+    ViewSystemLocationTypeRequest,
+    ViewSystemLocationsResponse
 } from './space-trader-provider-interfaces'
 
 
@@ -22,10 +30,13 @@ export interface ISpaceTraderEndpoints {
     loansAvailable: RestfulGetEndpoint<BaseTokenRequest, AvailableLoanResponse>
     claimLoan: RestfulPostEndpoint<ClaimLoanRequest, UserAccountResponse>
     repayLoan: RestfulPutEndpoint<RepayLoanRequest, UserAccountResponse>
-    shipsAvailable: RestfulGetEndpoint<ViewShipsRequest, ViewShipsResponse>,
+    shipsAvailable: RestfulGetEndpoint<ViewShipsRequest, ViewShipsResponse>
     purchaseShip: RestfulPostEndpoint<PurchaseShipRequest, UserAccountResponse>
     viewMarket: RestfulGetEndpoint<ViewMarketRequest, ViewMarketResponse>
     purchaseGoods: RestfulPostEndpoint<PurchaseGoodsRequest, PurchaseGoodsResponse>
+    viewSystems: RestfulGetEndpoint<BaseTokenRequest, ViewSystemsResponse>
+    viewSystemLocations: RestfulGetEndpoint<ViewSystemLocationsRequest, ViewSystemLocationsResponse>
+    viewSystemLocationType: RestfulGetEndpoint<ViewSystemLocationTypeRequest, ViewSystemLocationsResponse>
 }
 
 export interface SpaceTraderProviderProps extends RestfulProviderProps {
@@ -78,6 +89,18 @@ class SpaceTraderProvider extends RestfulProvider {
             purchaseGoods: new RestfulPostEndpoint({
                 endpoint: "/users/$username/purchase-orders?token=$token&shipId=$shipId&good=$good&quantity=$quantity",
                 provider: this
+            }),
+            viewSystems: new RestfulGetEndpoint({
+                endpoint: '/game/systems?token=$token',
+                provider: this,
+            }),
+            viewSystemLocations: new RestfulGetEndpoint({
+                endpoint: '/game/systems/$system/locations?token=$token',
+                provider: this,
+            }),
+            viewSystemLocationType: new RestfulGetEndpoint({
+                endpoint: "/game/systems/$system/locations?token=$token&type=$type",
+                provider: this,
             }),
         }
     }

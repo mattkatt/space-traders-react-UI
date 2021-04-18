@@ -71,3 +71,22 @@ export interface PurchaseGoodsResponse {
     order: STOrder
     ship: STShipOwned
 }
+
+export interface ViewSystemsResponse {
+    symbol: string
+    name: string
+    locations: STLocation[]
+}
+
+export interface ViewSystemLocationsRequest extends BaseTokenRequest {
+    system: string
+}
+
+export interface ViewSystemLocationTypeRequest extends ViewSystemLocationsRequest {
+    type: string
+}
+
+export interface ViewSystemLocationsResponse {
+    locations: STLocation[]
+
+}
