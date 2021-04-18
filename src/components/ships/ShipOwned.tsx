@@ -23,16 +23,8 @@ const ShipOwned: FC<IShipOwned> = ({ ship }) => {
             currentVolume += item.totalVolume
         })
 
-        return `${ currentVolume }/${ ship.maxCargo }`
+        return `${ currentVolume }/${ VolumeHelpers.display(ship.maxCargo) }`
     }
-
-    const goods = ship.cargo.map(goods => (
-        <tr key={ goods.good }>
-            <td>{ goods.good }</td>
-            <td>{ goods.quantity }</td>
-            <td>{ VolumeHelpers.display(goods.totalVolume) }</td>
-        </tr>
-    ))
 
     return (
         <figure className={ `${ styles.ship } ${ styles.shipOwned }` }>
@@ -54,7 +46,13 @@ const ShipOwned: FC<IShipOwned> = ({ ship }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    { ship.cargo.length ? goods : (
+                    { ship.cargo.length ? ship.cargo.map(goods => (
+                        <tr key={ goods.good }>
+                            <td>{ goods.good }</td>
+                            <td>{ goods.quantity }</td>
+                            <td>({ VolumeHelpers.display(goods.totalVolume) })</td>
+                        </tr>
+                    )) : (
                         <tr>
                             <td><i>Empty</i></td>
                         </tr>
