@@ -4,6 +4,7 @@ import { STLoanAvailable } from "../../objects/loan";
 import { STShipAvailable, STShipOwned } from "../../objects/ship";
 import { STLocation } from "../../objects/location";
 import { STOrder } from "../../objects/goods";
+import { STSystem } from "../../objects/system";
 
 
 export interface BaseUserRequest extends TRestfulData {
@@ -73,9 +74,7 @@ export interface PurchaseGoodsResponse {
 }
 
 export interface ViewSystemsResponse {
-    symbol: string
-    name: string
-    locations: STLocation[]
+    systems: STSystem[]
 }
 
 export interface ViewSystemLocationsRequest extends BaseTokenRequest {

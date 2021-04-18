@@ -4,6 +4,8 @@ import { STLoanAvailable } from "../objects/loan";
 import { STShipAvailable } from "../objects/ship";
 import { STGoods, STOrder } from "../objects/goods";
 import { useAuth } from "../context/auth-context";
+import { STLocation } from "../objects/location";
+import { STSystem } from "../objects/system";
 
 interface ISpaceTraderService {
     checkGameStatus: () => Promise<string>
@@ -16,6 +18,8 @@ interface ISpaceTraderService {
     purchaseShip: (location: string, type: string) => Promise<STUser>
     viewMarket: (location: string) => Promise<STGoods[]>
     purchaseGoods: (good: STGoods, shipId: string, quantity: number) => Promise<any>
+    viewSystems: () => Promise<STSystem[]>
+    viewSystemLocations: (system: string, type?: string) => Promise<STLocation[]>
 }
 
 export const useSpaceTraderService = (): ISpaceTraderService => {
@@ -117,6 +121,10 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
             location: location,
         })
 
+        if (!response.location.marketplace) {
+            throw new Error('No marketplace at location')
+        }
+
         return response.location.marketplace
     }
 
@@ -136,6 +144,31 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
         return response.order
     }
 
+    const viewSystems = async (): Promise<STSystem[]> => {
+        checkAuth()
+
+        const response = await provider.endpoints.viewSystems.get({
+            token: auth.token,
+        })
+
+        return response.systems
+    }
+
+    const viewSystemLocations = async (system: string, type?: string): Promise<STLocation[]> => {
+        checkAuth()
+
+        const response = type ? await provider.endpoints.viewSystemLocationType.get({
+            token: auth.token,
+            system: system,
+            type: type,
+        }) : await provider.endpoints.viewSystemLocations.get({
+            token: auth.token,
+            system: system
+        })
+
+        return response.locations
+    }
+
     return {
         checkGameStatus,
         generateUserToken,
@@ -146,6 +179,8 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
         getAvailableShips,
         purchaseShip,
         viewMarket,
-        purchaseGoods
+        purchaseGoods,
+        viewSystems,
+        viewSystemLocations,
     }
 }
