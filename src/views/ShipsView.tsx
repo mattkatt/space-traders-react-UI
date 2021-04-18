@@ -22,7 +22,7 @@ const ShipsView: FC = () => {
     })
 
     const renderUserShips = () => {
-        return auth.user.ships.map(ship => {
+        return Object.values(auth.user.ships).map(ship => {
             return (
                 <ShipOwned ship={ ship } key={ ship.id } />
             )

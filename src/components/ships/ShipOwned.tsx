@@ -6,6 +6,7 @@ import ShipTitle from "./ShipTitle";
 import Modal from "../modal";
 import Market from "../market";
 import Button from "../ui/buttons";
+import { VolumeHelpers } from "../../helpers";
 
 
 interface IShipOwned {
@@ -14,13 +15,22 @@ interface IShipOwned {
 
 const ShipOwned: FC<IShipOwned> = ({ ship }) => {
     const [modal, setModal] = useState(false)
-    const currentSpace = `${ ship.cargo.length }/${ ship.maxCargo }`
+
+    const currentSpace = ( ) => {
+        let currentVolume = 0
+
+        ship.cargo.forEach(item => {
+            currentVolume += item.totalVolume
+        })
+
+        return `${ currentVolume }/${ ship.maxCargo }`
+    }
 
     const goods = ship.cargo.map(goods => (
-        <tr>
+        <tr key={ goods.good }>
             <td>{ goods.good }</td>
             <td>{ goods.quantity }</td>
-            <td>{ goods.totalVolume }</td>
+            <td>{ VolumeHelpers.display(goods.totalVolume) }</td>
         </tr>
     ))
 
@@ -33,16 +43,14 @@ const ShipOwned: FC<IShipOwned> = ({ ship }) => {
             <ShipItem>Speed: { ship.speed }</ShipItem>
             <ShipItem>Weapons: { ship.weapons }</ShipItem>
             <ShipItem>Plating: { ship.plating }</ShipItem>
-            <ShipItem>Cargo Space: { ship.maxCargo }</ShipItem>
             <hr />
 
             <ShipItem>Current Location: { ship.location } ({ ship.x }, { ship.y })</ShipItem>
-            <ShipItem>Current Cargo ({ currentSpace }):</ShipItem>
 
             <table>
                 <thead>
                     <tr>
-                        <th colSpan={ 99 }>Goods</th>
+                        <th colSpan={ 99 }>Cargo ({ currentSpace() })</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,7 +65,11 @@ const ShipOwned: FC<IShipOwned> = ({ ship }) => {
             { !ship.location ? null : (
                 <>
                     <hr />
-                    <Button onClick={ () => setModal(true) } content="Show Market"/>
+                    <Button
+                        onClick={ () => setModal(true) }
+                        content="Show Market"
+                    />
+
                     <Modal display={ modal } onDismiss={ () => setModal(false) } title="Market">
                         <Market location={ ship.location } shipId={ ship.id } />
                     </Modal>

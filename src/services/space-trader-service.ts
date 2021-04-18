@@ -2,8 +2,7 @@ import { getSpaceTraderProvider } from "../providers/space-trader-provider/space
 import { STUser } from "../objects/user";
 import { STLoanAvailable } from "../objects/loan";
 import { STShipAvailable } from "../objects/ship";
-import { STGoods } from "../objects/goods";
-import { PurchaseGoodsResponse } from "../providers/space-trader-provider/space-trader-provider-interfaces";
+import { STGoods, STOrder } from "../objects/goods";
 import { useAuth } from "../context/auth-context";
 
 interface ISpaceTraderService {
@@ -16,12 +15,12 @@ interface ISpaceTraderService {
     getAvailableShips: (shipClass: string) => Promise<STShipAvailable[]>
     purchaseShip: (location: string, type: string) => Promise<STUser>
     viewMarket: (location: string) => Promise<STGoods[]>
-    purchaseGoods: (good: string, shipId: string, quantity: number) => Promise<any>
+    purchaseGoods: (good: STGoods, shipId: string, quantity: number) => Promise<any>
 }
 
 export const useSpaceTraderService = (): ISpaceTraderService => {
     const provider = getSpaceTraderProvider()
-    const { auth } = useAuth()
+    const { auth, updateUserCredits, updateUserShip } = useAuth()
 
     const checkAuth = () => {
         if (!auth.isAuth) {
@@ -121,16 +120,20 @@ export const useSpaceTraderService = (): ISpaceTraderService => {
         return response.location.marketplace
     }
 
-    const purchaseGoods = async (good: string, shipId: string, quantity: number): Promise<PurchaseGoodsResponse> => {
+    const purchaseGoods = async (good: STGoods, shipId: string, quantity: number): Promise<STOrder> => {
         checkAuth()
 
-        return await provider.endpoints.purchaseGoods.post({
+        let response = await provider.endpoints.purchaseGoods.post({
             username: auth.user.username,
             token: auth.token,
             shipId: shipId,
-            good: good,
+            good: good.symbol,
             quantity: quantity,
         })
+
+        updateUserCredits(response.credits)
+        updateUserShip(response.ship)
+        return response.order
     }
 
     return {

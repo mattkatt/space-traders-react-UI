@@ -76,7 +76,7 @@ class SpaceTraderProvider extends RestfulProvider {
                 provider: this
             }),
             purchaseGoods: new RestfulPostEndpoint({
-                endpoint: "users/$username/purchase-orders?token=$token&shipId=$shipId&good=$good&quantity=$quantity",
+                endpoint: "/users/$username/purchase-orders?token=$token&shipId=$shipId&good=$good&quantity=$quantity",
                 provider: this
             }),
         }

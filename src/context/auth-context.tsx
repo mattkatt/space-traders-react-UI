@@ -2,6 +2,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 import { STUser } from "../objects/user";
 import { useSettings } from "./settings-context";
 import { useLocalStorageService } from "../services";
+import { STShipOwned } from "../objects/ship";
 
 
 interface IAuthState {
@@ -16,13 +17,15 @@ interface IAuth {
     login: (user: STUser, token: string) => void
     logout: () => void
     updateUser: (user: STUser) => void
+    updateUserCredits: (credits: number) => void
+    updateUserShip: (ship: STShipOwned) => void
 }
 
 const emptyUser: STUser = {
     username: "",
     credits: 0,
     loans: [],
-    ships: []
+    ships: {}
 }
 
 const defaultAuthState: IAuthState =  {
@@ -94,12 +97,25 @@ function useAuth(): IAuth {
     }
 
     const updateUser = (user: STUser) => {
-        let currentAuth = auth as IAuthState
+        let currentAuth = { ...auth } as IAuthState
+        currentAuth.user = user
+        setAuth(currentAuth)
+    }
 
-        setAuth({
-            ...currentAuth,
-            user: user
-        })
+    const updateUserCredits = (credits: number) => {
+        let currentAuth = { ...auth } as IAuthState
+        currentAuth.user.credits = credits
+        setAuth(currentAuth)
+    }
+
+    const updateUserShip = (ship: STShipOwned) => {
+        if (!auth.user.ships[ship.id]) {
+            throw new Error(`Ship ${ ship.id } not found`)
+        }
+
+        let currentAuth = { ...auth } as IAuthState
+        currentAuth.user.ships[ship.id] = ship
+        setAuth(currentAuth)
     }
 
     return {
@@ -107,7 +123,9 @@ function useAuth(): IAuth {
         checkLocalAuth,
         login,
         logout,
-        updateUser
+        updateUser,
+        updateUserCredits,
+        updateUserShip,
     }
 }
 
